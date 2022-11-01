@@ -1,0 +1,244 @@
+body {
+    background-color: #FAFAFA;
+    margin: 46px 50px 0 50px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+    
+}
+
+#phone {
+    float: left;
+    width: 332px;
+    text-align: center;
+    padding-left: 254px;
+}
+
+.box {
+    float: right;
+    width: 349px;
+    height: 379px;
+    text-align: center;
+    margin-top: 17px;
+    margin-right: 247px;
+    background-color: white;
+    border: 0.5px solid gainsboro;
+}
+
+.box img { 
+    padding-top: 32px;
+    padding-right: 3px;
+}
+
+.box form {
+    margin-top: 32px;
+}
+
+form input {
+    justify-content: center;
+    content: center;
+    display: flex;
+    border-radius: 5px;
+    border: 0.5px solid gainsboro;
+    width: 70%;
+    margin-left: 40px;
+    margin-bottom: 6px;
+}
+
+input[type=text], [type=password] {
+    background-color: #FAFAFA;
+    font-size: 11.48px;
+    padding: 13px 
+} 
+
+::placeholder {
+    color: darkgrey;
+    font-weight: normal;
+}
+
+input[type=submit] {
+    background-color: #C3E0FA;
+    font-weight: 548;
+    color: white;
+    padding: 8px 0px 7px 0;
+    margin-top: 12px;
+    width: 267.3px;
+    border: none;
+  }
+
+
+#or {
+    display: inline;
+    color: slategray;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+hr.ha {
+    border: 0.5px solid gainsboro;
+}
+
+hr.he {
+    border: 0.5px solid gainsboro;
+}
+
+#or div:first-child {
+      width: 108px;
+      float: left;
+      padding-left: 39px;
+      padding-top: 12px;
+
+  }
+
+#haha {
+        width: 108px;
+        float: right;
+        padding-right: 45px;
+        padding-top: 12px;
+      }
+
+#or p {
+      float: left;
+      padding-left: 18px;
+      margin-top: 11px;
+}  
+
+#lgf {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    cursor: pointer;
+}
+
+#lgf img {
+    width: 16px;
+    height: 16x;
+    padding: 0;
+    padding-right: 5px;
+
+}
+
+#lgf p {
+   margin: auto;
+   margin-top: 12px;
+   font-weight: 500;
+   font-size: 14.25px;
+   color: midnightblue;
+    
+}
+
+#fps {
+   font-size: 12px;
+   color: midnightblue;
+   padding-top: 19px;
+   cursor: pointer;
+}
+
+
+.box2 {
+    float: right;
+    width: 349px;
+    height: 61.5px;
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 247px;
+    background-color: white;
+    border: 0.5px solid gainsboro;
+}
+
+.box2 p {
+    font-size: 14px;
+    font-weight: lighter;
+    padding-top: 7px;
+    
+}
+
+.box2 a {
+    text-decoration: none;
+    font-weight: 500;
+    color: dodgerblue;
+}
+
+.ad {
+    padding-top: 475px;
+    margin-bottom: 91px;
+    padding-left: 685px;
+    width: 300px;
+}
+
+.ad p {
+    font-size: 14px;
+    padding-left: 103.45px;
+    margin-bottom: 20px;
+    
+}
+
+.ad img{
+    width: 135.5px;
+    height: 40px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+#foot {
+    display: inline;
+    width: 700px;
+    padding-bottom: 48px;
+    padding-left: 120px;
+    margin: 0;
+
+}
+
+#foot a {
+    color: navy;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+    margin-right: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    
+}
+
+
+
+
+@media (max-width: 999px) {
+
+    #phone {
+    display: none;
+    }
+
+    .box {
+        width: 90%;
+        margin: 0;
+        padding: 0;
+        float: none;
+        margin: auto;
+    }
+
+    .box2 {
+        width: 90%;
+        margin: 0;
+        padding: 0;
+        float: none;
+        margin: auto;
+        margin-top: 10px;
+    }
+
+    .ad {
+        margin: auto;
+        padding: 0;
+        padding-bottom: 50px;
+    }
+
+    footer {
+        text-align: justify;
+        margin-bottom: 10px;
+    }
+
+    #foot { 
+        margin: 0;
+        padding: 0;
+    }
+
+
+}

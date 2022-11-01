@@ -58,8 +58,8 @@ span {
 
 .mario {
     position: absolute;
-    height: 100px;
-    width: 100px;
+    height: 60px;
+    width: 60px;
     top: 565px;
     animation: marioation linear 4s infinite,
                jumpation ease 0.8s 1.7s;
