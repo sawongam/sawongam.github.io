@@ -1,0 +1,104 @@
+@font-face {
+    font-family: Aceh;
+    src: url(/assets/Aceh-Light.ttf);
+  }
+
+body {
+    font-family: Aceh;
+}
+.container {
+    display: flex;
+}
+
+
+.left-half {
+    flex: 1;
+}
+
+.right-half {
+    padding: 0% 10px 0% 100px;
+    flex: 1;
+}
+
+.intro {
+    padding-top: 100px;
+    padding-bottom: 5px;
+    color: #827f7f;
+    font-weight: 500;
+    font-family: Arial;
+
+}
+
+.myName {
+    font-size: 69px;
+    font-weight: 1000;
+    font-family: Aceh;
+}
+
+.right-half p{
+    font-size: 20px;
+    font-weight: 550;
+    color: #3d3d3d;
+}
+
+.contactMe {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.contactMe a {
+    padding: 12px 30px;
+    border: #459ce8 2px solid;
+    border-radius: 3px;
+    font-style: normal;
+    text-decoration: none;
+    color: #000;
+}
+
+.contactMe a:hover {
+    background-color: rgb(68, 155, 232);
+    color: #fff;
+}
+
+.titled {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    margin-left: 3%;
+    font-size: 1.7em;
+    font-weight: bolder;
+    margin-bottom: 0.5em;
+    text-decoration: underline #459ce8;
+}
+
+.tableContents{
+    padding: 10px 69px 0 69px;
+}
+
+.icon{
+    height: 60px;
+    width: 60px;
+}
+
+.tableTopics {
+    font-weight: 900;
+    font-size: 1.4em;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.tableContents td {
+    padding: 25px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #3d3d3d;
+}
+
+/* table th {
+    padding: 10px;
+    border: #000 1px solid;
+}
+
+table td {
+    padding: 10px;
+    border: #000 1px solid;
+} */
