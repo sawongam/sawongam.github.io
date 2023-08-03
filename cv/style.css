@@ -1,0 +1,62 @@
+@font-face {
+    font-family: Aceh;
+    src: url(/cv/assets/Aceh-Light.ttf);
+}
+
+body {
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 0 350px;
+    font-family: Aceh;
+    font-weight: 600;
+    padding-top: 30px;
+}
+
+img {
+    width: 250px;
+    height: 250px;
+    text-align: center;
+    border: #044157 3px solid;
+    border-radius: 50%;
+}
+
+.beginning h1 {
+    font-size: 40px;
+    font-weight: 1000;
+}
+
+.beginning h2 {
+    font-size: 30px;
+    font-weight: 1000;
+    color: #7aa0ae;
+}
+
+body h2 {
+    font-size: 36px;
+    font-weight: 1000;
+    color: #08bbfd;
+}
+
+.skills {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+table {
+    margin: auto;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table td {
+    padding: 7px;
+}
+
+.bold {
+    font-size: 23px;
+}
+
+.portfolio a {
+    color: #6ca6bc;
+    }

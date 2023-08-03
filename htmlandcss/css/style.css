@@ -1,0 +1,66 @@
+body {
+    background-image: url(../img/bg.png);
+    color: aliceblue;
+    height: 100%;
+    margin: 0;
+}
+
+.centertext {
+    width: 900px;
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.centertext h1 {
+    text-align: center;
+    font-size: 80px;
+    color: orange;
+    font-weight: bold;
+    animation: textanimation 1.5s ease-in-out;
+    margin-bottom: 0px;
+}
+
+.centertext p {
+    text-align: center;
+    font-size: 50px;
+    color: pink;
+    font-weight: bold;
+    animation: textanimation2 1.5s ease-in-out;
+    margin-top: 0;
+}
+
+.and {
+    text-align: center;
+    font-size: 50px;
+    color: rgb(184, 216, 174);
+    font-weight: bold;
+    animation: textanimation3 1.5s ease-in-out;
+    margin-top: 0;
+}
+
+span {
+    color: rgb(22, 105, 173);
+}
+
+.lob {
+    position: absolute;
+    top:  13%;
+    left: 31.5%;
+    animation: lobmation 2s ease-in-out;
+}
+
+.lob img {
+    width: 501px;
+    height: 420px;
+}
+
+.mario {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    top: 565px;
+    animation: marioation linear 4s infinite,
+               jumpation ease 0.8s 1.7s;
+}
