@@ -6,10 +6,9 @@
 body {
     background-color: #f8f8f8;
     text-align: center;
-    padding: 0 350px;
-    font-family: Aceh;
+    padding: 30px 350px 0;
+    font-family: Aceh, sans-serif;
     font-weight: 600;
-    padding-top: 30px;
 }
 
 img {
@@ -59,4 +58,69 @@ table td {
 
 .portfolio a {
     color: #6ca6bc;
+}
+
+@media (max-width: 1200px) {
+    body {
+        padding: 30px 200px 0;
     }
+}
+
+@media (max-width: 992px) {
+    body {
+        padding: 30px 100px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 30px 50px 0;
+    }
+    
+    .beginning h1 {
+        font-size: 32px;
+    }
+    
+    .beginning h2 {
+        font-size: 24px;
+    }
+    
+    body h2 {
+        font-size: 28px;
+    }
+    
+    .bold {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 20px 20px 0;
+    }
+    
+    img {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .beginning h1 {
+        font-size: 28px;
+    }
+    
+    .beginning h2 {
+        font-size: 22px;
+    }
+    
+    body h2 {
+        font-size: 24px;
+    }
+    
+    .bold {
+        font-size: 18px;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+}
