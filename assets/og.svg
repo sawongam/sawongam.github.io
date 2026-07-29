@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0a1210"/>
+  <circle cx="980" cy="140" r="180" fill="#a8ff3e" fill-opacity="0.12"/>
+  <circle cx="140" cy="520" r="120" fill="#a8ff3e" fill-opacity="0.08"/>
+  <text x="72" y="120" fill="#6fad28" font-family="DejaVu Sans Mono, monospace" font-size="28" letter-spacing="6">DEVELOPER HUB</text>
+  <text x="64" y="320" fill="#f3f0e6" font-family="DejaVu Sans, sans-serif" font-size="120" font-weight="700">SAWONGAM</text>
+  <text x="72" y="400" fill="#d8e2d6" font-family="DejaVu Sans Mono, monospace" font-size="28">Sangam Adhikari - Flutter packages - demos</text>
+  <text x="72" y="520" fill="#a8ff3e" font-family="DejaVu Sans Mono, monospace" font-size="26">sawongam.github.io  -  sangamadhikari.com</text>
+</svg>
