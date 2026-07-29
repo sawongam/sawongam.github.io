@@ -1,11 +1,13 @@
 User-agent: *
 Allow: /
-Disallow: /.cursor/
+
+# Old student demos / binaries (removed from site; keep blocked if ever restored)
 Disallow: /dumps/
-Disallow: /cv/
 Disallow: /fb-clone/
 Disallow: /insta-clone/
 Disallow: /twitter-clone/
 Disallow: /htmlandcss/
+Disallow: /cv/
+Disallow: /.cursor/
 
 Sitemap: https://sawongam.github.io/sitemap.xml
