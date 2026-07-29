@@ -6,33 +6,27 @@
   <title>404 — Sawongam</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    .miss {
-      min-height: 70vh;
-      display: grid;
-      place-content: center;
-      gap: 1rem;
-      padding: 2rem;
-      text-align: center;
-    }
-    .miss h1 {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 12vw, 6rem);
-      letter-spacing: -0.04em;
-    }
+    :root { --bg:#0a1210; --fg:#d7e4d8; --mute:#6f8576; --signal:#a8ff3e; --red:#ff6b5a; }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--fg); font-family:"IBM Plex Mono",monospace; padding:2rem; }
+    pre { margin:0 0 1.25rem; font-size:13px; line-height:1.6; }
+    .err { color:var(--red); }
+    .ok { color:var(--signal); }
+    .dim { color:var(--mute); }
+    a { color:var(--signal); }
   </style>
 </head>
 <body>
-  <main class="miss">
-    <p class="eyebrow">Signal lost</p>
-    <h1>404</h1>
-    <p>That path isn’t on this hub.</p>
-    <p>
-      <a class="btn btn--signal" href="/">Back to sawongam.github.io</a>
-      <a class="btn btn--ghost" href="https://sangamadhikari.com">sangamadhikari.com</a>
-    </p>
-  </main>
+  <div>
+    <pre><span class="err">error:</span> path not found
+<span class="dim">$ ls</span>
+  README.md
+  packages.dart
+  apps.json
+
+<span class="ok">hint:</span> cd /</pre>
+    <p><a href="/">→ sawongam.github.io</a> · <a href="https://sangamadhikari.com">sangamadhikari.com</a></p>
+  </div>
 </body>
 </html>

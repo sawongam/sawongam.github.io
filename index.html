@@ -24,7 +24,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 
   <script type="application/ld+json">
@@ -88,234 +88,276 @@
   </script>
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-  <canvas id="field" class="field" aria-hidden="true"></canvas>
+  <!-- Boot overlay -->
+  <div id="boot" class="boot" aria-hidden="true">
+    <pre id="boot-log" class="boot__log"></pre>
+  </div>
 
-  <header class="top">
-    <a class="mark" href="#top" aria-label="Sawongam home">
-      <span class="mark__dot"></span>
-      <span>sawongam</span>
-    </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#packages">Packages</a>
-      <a href="#apps">Apps</a>
-      <a href="#stack">Stack</a>
-      <a href="#ecosystem">Ecosystem</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <a class="top__cta" href="https://sangamadhikari.com" rel="noopener noreferrer">sangamadhikari.com</a>
-  </header>
+  <div class="ide" id="ide">
+    <!-- Title bar -->
+    <header class="titlebar">
+      <div class="titlebar__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="titlebar__path">sawongam — workspace</p>
+      <button type="button" class="titlebar__cmd" id="cmd-open" title="Command palette (Ctrl+K)">
+        <span>⌘K</span> Command palette
+      </button>
+    </header>
 
-  <main id="top">
-    <section class="hero">
-      <p class="hero__kicker" data-reveal>
-        <span class="pulse"></span>
-        Developer hub · open source · demos
-      </p>
-      <h1 class="hero__brand" data-reveal>
-        <span class="hero__brand-line">Sawongam</span>
-      </h1>
-      <p class="hero__lede" data-reveal>
-        Flutter full-stack work by Sangam Adhikari — packages on pub.dev,
-        production apps for 25,000+ users, and live demos that feed
-        <a href="https://sangamadhikari.com" rel="noopener noreferrer">sangamadhikari.com</a>.
-      </p>
-      <div class="hero__actions" data-reveal>
-        <a class="btn btn--signal" href="https://pub.dev/publishers/sangamadhikari.com/packages" rel="noopener noreferrer">Browse packages</a>
-        <a class="btn btn--ghost" href="https://sangamadhikari.com/portfolio" rel="noopener noreferrer">Full portfolio</a>
-        <a class="btn btn--ghost" href="https://github.com/sawongam" rel="noopener noreferrer">GitHub</a>
-      </div>
-    </section>
+    <div class="ide__body">
+      <!-- Activity rail -->
+      <aside class="activity" aria-label="Activity">
+        <button type="button" class="activity__btn is-active" data-panel="explorer" title="Explorer" aria-label="Explorer">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h6l2 2h8v12H4z"/></svg>
+        </button>
+        <button type="button" class="activity__btn" data-panel="search" title="Search" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="6"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+        <button type="button" class="activity__btn" data-panel="git" title="Source control" aria-label="Source control">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="6" cy="18" r="2.2"/><path d="M8.2 6h5.3a4 4 0 014 4v0M8.2 18h5.3a4 4 0 004-4v0M6 8.2v7.6"/></svg>
+        </button>
+        <a class="activity__btn activity__btn--link" href="https://github.com/sawongam" rel="noopener noreferrer" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2a10 10 0 00-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.4-1-.9-1.3-.9-1.3-.8-.5.1-.5.1-.5.9.1 1.3.9 1.3.9.8 1.3 2 1 2.5.7.1-.6.3-1 .6-1.2-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 011-2.7 3.6 3.6 0 01.1-2.7s.8-.3 2.7 1a9.3 9.3 0 014.9 0c1.9-1.3 2.7-1 2.7-1 .4.9.3 1.9.1 2.7a3.9 3.9 0 011 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5A10 10 0 0012 2z"/></svg>
+        </a>
+      </aside>
 
-    <section class="meter-band" aria-label="Shipping metrics">
-      <dl class="hero__meter" data-reveal>
-        <div>
-          <dt>Users shipped</dt>
-          <dd><span data-count="25000">0</span>+</dd>
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__panel is-active" data-panel-view="explorer">
+          <p class="sidebar__label">Explorer</p>
+          <details open class="tree">
+            <summary>SAWONGAM</summary>
+            <button type="button" class="tree__file is-active" data-file="readme">📄 README.md</button>
+            <button type="button" class="tree__file" data-file="packages">📦 packages.dart</button>
+            <button type="button" class="tree__file" data-file="apps">📱 apps.json</button>
+            <button type="button" class="tree__file" data-file="stack">⚙️ stack.yaml</button>
+            <button type="button" class="tree__file" data-file="ecosystem">🔗 ecosystem.links</button>
+            <button type="button" class="tree__file" data-file="contact">📡 contact.sh</button>
+          </details>
         </div>
-        <div>
-          <dt>Pub packages</dt>
-          <dd><span data-count="2">0</span></dd>
+        <div class="sidebar__panel" data-panel-view="search">
+          <p class="sidebar__label">Search</p>
+          <input class="sidebar__input" id="sidebar-search" type="search" placeholder="Search workspace…" autocomplete="off" />
+          <ul class="sidebar__hits" id="search-hits"></ul>
         </div>
-        <div>
-          <dt>Years shipping</dt>
-          <dd><span data-count="3">0</span>+</dd>
+        <div class="sidebar__panel" data-panel-view="git">
+          <p class="sidebar__label">Source Control</p>
+          <pre class="gitlog" id="git-log"></pre>
         </div>
-      </dl>
-    </section>
+      </aside>
 
-    <section class="band" id="packages" aria-labelledby="packages-title">
-      <div class="band__head" data-reveal>
-        <p class="eyebrow">01 — Open source</p>
-        <h2 id="packages-title">Flutter packages on pub.dev</h2>
-        <p class="band__sub">
-          Installable kits under publisher
-          <a href="https://pub.dev/publishers/sangamadhikari.com/packages" rel="noopener noreferrer">sangamadhikari.com</a>.
-          Docs and demos live here; long-form writeups live on the main site.
-        </p>
-      </div>
+      <!-- Editor column -->
+      <section class="workspace">
+        <div class="tabs" id="tabs" role="tablist" aria-label="Open editors"></div>
 
-      <div class="pkg-grid">
-        <article class="pkg" data-reveal>
-          <div class="pkg__chrome">
-            <span></span><span></span><span></span>
-            <code>pub.dev / multi_tap_action</code>
-          </div>
-          <h3>multi_tap_action</h3>
-          <p>Detect N taps on any widget — double, triple, or custom — with haptic feedback and reset windows.</p>
-          <div class="pkg__meta">
-            <span>v2.1.1</span>
-            <span>MIT</span>
-            <span>Flutter</span>
-          </div>
-          <pre class="pkg__code" tabindex="0"><code>flutter pub add multi_tap_action</code></pre>
-          <div class="pkg__links">
-            <a href="https://pub.dev/packages/multi_tap_action" rel="noopener noreferrer">pub.dev</a>
-            <a href="https://github.com/sawongam/multi_tap_action" rel="noopener noreferrer">source</a>
-            <a href="https://sangamadhikari.com/portfolio" rel="noopener noreferrer">on portfolio</a>
-          </div>
-        </article>
+        <div class="editor" id="editor">
+          <!-- README -->
+          <article class="buf is-active" data-buf="readme" role="tabpanel">
+            <div class="buf__gutter" aria-hidden="true"></div>
+            <pre class="buf__code"><code><span class="tok-h1"># SAWONGAM</span>
 
-        <article class="pkg pkg--hot" data-reveal>
-          <div class="pkg__chrome">
-            <span></span><span></span><span></span>
-            <code>pub.dev / tournament_bracket_kit</code>
-          </div>
-          <h3>tournament_bracket_kit</h3>
-          <p>Single-elimination brackets with pan/zoom, round tabs, elbow connectors, and fully custom match cards.</p>
-          <div class="pkg__meta">
-            <span>v0.1.0</span>
-            <span>MIT</span>
-            <span>New</span>
-          </div>
-          <pre class="pkg__code" tabindex="0"><code>flutter pub add tournament_bracket_kit</code></pre>
-          <div class="pkg__links">
-            <a href="https://pub.dev/packages/tournament_bracket_kit" rel="noopener noreferrer">pub.dev</a>
-            <a href="https://github.com/sawongam/tournament_bracket_kit" rel="noopener noreferrer">source</a>
-            <a href="https://sangamadhikari.com" rel="noopener noreferrer">sangamadhikari.com</a>
-          </div>
-        </article>
-      </div>
-    </section>
+<span class="tok-cmt">/// Developer hub for Sangam Adhikari</span>
+<span class="tok-cmt">/// Primary site → https://sangamadhikari.com</span>
 
-    <section class="band band--tight" id="apps" aria-labelledby="apps-title">
-      <div class="band__head" data-reveal>
-        <p class="eyebrow">02 — Production</p>
-        <h2 id="apps-title">Apps that already have users</h2>
-        <p class="band__sub">
-          Case studies and screenshots live on
-          <a href="https://sangamadhikari.com/portfolio" rel="noopener noreferrer">sangamadhikari.com/portfolio</a>.
-          This hub points at the shipping surface.
-        </p>
-      </div>
+<span class="tok-kw">class</span> <span class="tok-type">Sawongam</span> <span class="tok-p">{</span>
+  <span class="tok-kw">final</span> name = <span class="tok-str">"Sangam Adhikari"</span>;
+  <span class="tok-kw">final</span> handle = <span class="tok-str">"sawongam"</span>;
+  <span class="tok-kw">final</span> role = <span class="tok-str">"Flutter Full-Stack Developer"</span>;
+  <span class="tok-kw">final</span> usersShipped = <span class="tok-num">25000</span>;
+  <span class="tok-kw">final</span> years = <span class="tok-num">3</span>;
+  <span class="tok-kw">final</span> base = <span class="tok-str">"Lalitpur, Nepal"</span>;
 
-      <div class="rail" data-reveal>
-        <article class="rail__item">
-          <span class="rail__tag">25K+ users</span>
-          <h3>Simple Patro</h3>
-          <p>Offline-first Nepali calendar — Hive, home-screen widgets, Workmanager sync, localization.</p>
-          <a href="https://sangamadhikari.com/portfolio" rel="noopener noreferrer">Case study →</a>
-        </article>
-        <article class="rail__item">
-          <span class="rail__tag">5K+ DAU</span>
-          <h3>RestroX</h3>
-          <p>Restaurant platform — GetX→BLoC migration, WebSockets, offline kitchen, thermal printing, payments.</p>
-          <a href="https://sangamadhikari.com/portfolio" rel="noopener noreferrer">Case study →</a>
-        </article>
-        <article class="rail__item">
-          <span class="rail__tag">AI + voice</span>
-          <h3>Chablyy</h3>
-          <p>Social automation — Flutter, NestJS, Next.js, RAG, Meta Graph APIs, SIP telephony.</p>
-          <a href="https://sangamadhikari.com" rel="noopener noreferrer">Main site →</a>
-        </article>
-        <article class="rail__item">
-          <span class="rail__tag">Tournaments</span>
-          <h3>Futsal Planner Hub</h3>
-          <p>Knockout brackets, dynamic scheduling, team management — from concept to Play Store.</p>
-          <a href="https://github.com/sawongam/tournament_bracket_kit" rel="noopener noreferrer">Bracket kit →</a>
-        </article>
-      </div>
-    </section>
+  <span class="tok-type">Uri</span> get portfolio =&gt; <span class="tok-type">Uri</span>.parse(<span class="tok-str">"https://sangamadhikari.com"</span>);
+  <span class="tok-type">Uri</span> get github =&gt; <span class="tok-type">Uri</span>.parse(<span class="tok-str">"https://github.com/sawongam"</span>);
+  <span class="tok-type">Uri</span> get pub =&gt; <span class="tok-type">Uri</span>.parse(<span class="tok-str">"https://pub.dev/publishers/sangamadhikari.com"</span>);
+<span class="tok-p">}</span>
 
-    <section class="band" id="stack" aria-labelledby="stack-title">
-      <div class="band__head" data-reveal>
-        <p class="eyebrow">03 — Stack</p>
-        <h2 id="stack-title">What I ship with</h2>
-        <p class="band__sub">Owned end-to-end: architecture, Flutter clients, Nest/Next backends, CI/CD, and maintenance.</p>
-      </div>
-      <ul class="stack" data-reveal>
-        <li><span>Languages</span><strong>Dart · JavaScript</strong></li>
-        <li><span>Clients</span><strong>Flutter · BLoC / Cubit · Provider</strong></li>
-        <li><span>Servers</span><strong>NestJS · Next.js · Zustand</strong></li>
-        <li><span>Ops</span><strong>Docker · GitHub Actions · Codemagic · Shorebird · Vercel</strong></li>
-        <li><span>AI</span><strong>LLM APIs · RAG · Vector search · Prompt chaining</strong></li>
+<span class="tok-cmt">// Tip: open files from the explorer · press Ctrl/⌘K for commands</span>
+<span class="tok-cmt">// This page is the tools layer. Long-form content stays on the main domain.</span></code></pre>
+          </article>
+
+          <!-- packages -->
+          <article class="buf" data-buf="packages" role="tabpanel" hidden>
+            <div class="buf__gutter" aria-hidden="true"></div>
+            <pre class="buf__code"><code><span class="tok-kw">import</span> <span class="tok-str">'package:flutter/widgets.dart'</span>;
+
+<span class="tok-cmt">/// Publisher: sangamadhikari.com</span>
+<span class="tok-cmt">/// https://pub.dev/publishers/sangamadhikari.com/packages</span>
+
+<span class="tok-kw">final</span> packages = [
+  <span class="tok-type">PubPackage</span>(
+    name: <span class="tok-str">"multi_tap_action"</span>,
+    version: <span class="tok-str">"2.1.1"</span>,
+    license: <span class="tok-str">"MIT"</span>,
+    desc: <span class="tok-str">"Detect N taps on any widget — double, triple, custom."</span>,
+    install: <span class="tok-str">"flutter pub add multi_tap_action"</span>,
+    links: {
+      <span class="tok-str">"pub"</span>: <span class="tok-str">"https://pub.dev/packages/multi_tap_action"</span>,
+      <span class="tok-str">"src"</span>: <span class="tok-str">"https://github.com/sawongam/multi_tap_action"</span>,
+    },
+  ),
+  <span class="tok-type">PubPackage</span>(
+    name: <span class="tok-str">"tournament_bracket_kit"</span>,
+    version: <span class="tok-str">"0.1.0"</span>,
+    license: <span class="tok-str">"MIT"</span>,
+    desc: <span class="tok-str">"Single-elim brackets · pan/zoom · round tabs · custom cards."</span>,
+    install: <span class="tok-str">"flutter pub add tournament_bracket_kit"</span>,
+    links: {
+      <span class="tok-str">"pub"</span>: <span class="tok-str">"https://pub.dev/packages/tournament_bracket_kit"</span>,
+      <span class="tok-str">"src"</span>: <span class="tok-str">"https://github.com/sawongam/tournament_bracket_kit"</span>,
+    },
+  ),
+];
+
+<span class="tok-cmt">// Click an install line in the terminal below to copy it.</span></code></pre>
+          </article>
+
+          <!-- apps -->
+          <article class="buf" data-buf="apps" role="tabpanel" hidden>
+            <div class="buf__gutter" aria-hidden="true"></div>
+            <pre class="buf__code"><code><span class="tok-p">{</span>
+  <span class="tok-str">"$schema"</span>: <span class="tok-str">"sawongam/production-apps"</span>,
+  <span class="tok-str">"caseStudies"</span>: <span class="tok-str">"https://sangamadhikari.com/portfolio"</span>,
+  <span class="tok-str">"apps"</span>: [
+    {
+      <span class="tok-str">"name"</span>: <span class="tok-str">"Simple Patro"</span>,
+      <span class="tok-str">"users"</span>: <span class="tok-num">25000</span>,
+      <span class="tok-str">"stack"</span>: [<span class="tok-str">"Flutter"</span>, <span class="tok-str">"Hive"</span>, <span class="tok-str">"Workmanager"</span>, <span class="tok-str">"Widgets"</span>],
+      <span class="tok-str">"note"</span>: <span class="tok-str">"Offline-first Nepali calendar"</span>
+    },
+    {
+      <span class="tok-str">"name"</span>: <span class="tok-str">"RestroX"</span>,
+      <span class="tok-str">"dau"</span>: <span class="tok-num">5000</span>,
+      <span class="tok-str">"stack"</span>: [<span class="tok-str">"Flutter"</span>, <span class="tok-str">"BLoC"</span>, <span class="tok-str">"WebSocket"</span>, <span class="tok-str">"Payments"</span>],
+      <span class="tok-str">"note"</span>: <span class="tok-str">"Restaurant OS · GetX→BLoC migration"</span>
+    },
+    {
+      <span class="tok-str">"name"</span>: <span class="tok-str">"Chablyy"</span>,
+      <span class="tok-str">"stack"</span>: [<span class="tok-str">"Flutter"</span>, <span class="tok-str">"NestJS"</span>, <span class="tok-str">"Next.js"</span>, <span class="tok-str">"RAG"</span>, <span class="tok-str">"SIP"</span>],
+      <span class="tok-str">"note"</span>: <span class="tok-str">"AI social automation + voice"</span>
+    },
+    {
+      <span class="tok-str">"name"</span>: <span class="tok-str">"Futsal Planner Hub"</span>,
+      <span class="tok-str">"stack"</span>: [<span class="tok-str">"Flutter"</span>, <span class="tok-str">"Brackets"</span>, <span class="tok-str">"Scheduling"</span>],
+      <span class="tok-str">"note"</span>: <span class="tok-str">"Tournament management · Play Store"</span>
+    }
+  ]
+<span class="tok-p">}</span></code></pre>
+          </article>
+
+          <!-- stack -->
+          <article class="buf" data-buf="stack" role="tabpanel" hidden>
+            <div class="buf__gutter" aria-hidden="true"></div>
+            <pre class="buf__code"><code><span class="tok-key">languages</span>:
+  - <span class="tok-str">Dart</span>
+  - <span class="tok-str">JavaScript</span>
+
+<span class="tok-key">clients</span>:
+  - <span class="tok-str">Flutter</span>
+  - <span class="tok-str">BLoC / Cubit</span>
+  - <span class="tok-str">Provider</span>
+
+<span class="tok-key">servers</span>:
+  - <span class="tok-str">NestJS</span>
+  - <span class="tok-str">Next.js</span>
+  - <span class="tok-str">Zustand</span>
+
+<span class="tok-key">ops</span>:
+  - <span class="tok-str">Docker</span>
+  - <span class="tok-str">GitHub Actions</span>
+  - <span class="tok-str">Codemagic</span>
+  - <span class="tok-str">Shorebird</span>
+  - <span class="tok-str">Vercel</span>
+
+<span class="tok-key">ai</span>:
+  - <span class="tok-str">LLM APIs</span>
+  - <span class="tok-str">RAG</span>
+  - <span class="tok-str">Vector search</span>
+  - <span class="tok-str">Prompt chaining</span>
+
+<span class="tok-cmt"># Owned end-to-end: architecture → ship → maintain</span></code></pre>
+          </article>
+
+          <!-- ecosystem -->
+          <article class="buf" data-buf="ecosystem" role="tabpanel" hidden>
+            <div class="buf__gutter" aria-hidden="true"></div>
+            <pre class="buf__code"><code><span class="tok-cmt"># One brand · two surfaces</span>
+<span class="tok-cmt"># Long-form + portfolio on primary domain</span>
+<span class="tok-cmt"># Packages + demos on this GitHub Pages hub</span>
+
+<span class="tok-key">PRIMARY</span>   <span class="tok-str">https://sangamadhikari.com</span>                 <span class="tok-cmt"># blog · resume · contact</span>
+<span class="tok-key">WORK</span>      <span class="tok-str">https://sangamadhikari.com/portfolio</span>       <span class="tok-cmt"># case studies</span>
+<span class="tok-key">CODE</span>      <span class="tok-str">https://github.com/sawongam</span>               <span class="tok-cmt"># repos</span>
+<span class="tok-key">PACKAGES</span>  <span class="tok-str">https://pub.dev/publishers/sangamadhikari.com/packages</span>
+<span class="tok-key">NETWORK</span>   <span class="tok-str">https://www.linkedin.com/in/sawongam</span>
+<span class="tok-key">HUB</span>       <span class="tok-str">https://sawongam.github.io</span>               <span class="tok-cmt"># you are here</span></code></pre>
+          </article>
+
+          <!-- contact -->
+          <article class="buf" data-buf="contact" role="tabpanel" hidden>
+            <div class="buf__gutter" aria-hidden="true"></div>
+            <pre class="buf__code"><code><span class="tok-cmt">#!/usr/bin/env bash</span>
+<span class="tok-cmt"># contact.sh — reach Sangam Adhikari</span>
+
+<span class="tok-kw">export</span> NAME=<span class="tok-str">"Sangam Adhikari"</span>
+<span class="tok-kw">export</span> ROLE=<span class="tok-str">"Flutter Full-Stack Developer"</span>
+<span class="tok-kw">export</span> LOC=<span class="tok-str">"Lalitpur, Nepal"</span>
+
+<span class="tok-fn">open</span> <span class="tok-str">"mailto:sangamadhikari.61@gmail.com"</span>
+<span class="tok-fn">open</span> <span class="tok-str">"https://sangamadhikari.com/#contact"</span>
+<span class="tok-fn">open</span> <span class="tok-str">"https://github.com/sawongam"</span>
+<span class="tok-fn">open</span> <span class="tok-str">"tel:+9779819102869"</span>
+
+<span class="tok-fn">echo</span> <span class="tok-str">"Build something that ships."</span></code></pre>
+          </article>
+        </div>
+
+        <!-- Terminal -->
+        <div class="term" id="term">
+          <div class="term__bar">
+            <span>TERMINAL</span>
+            <span class="term__cwd">~/sawongam</span>
+          </div>
+          <div class="term__out" id="term-out" aria-live="polite"></div>
+          <form class="term__in" id="term-form" autocomplete="off">
+            <label class="term__prompt" for="term-input"><span>sawongam</span>:<span>~</span>$</label>
+            <input id="term-input" name="cmd" spellcheck="false" aria-label="Terminal input" />
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- Status bar -->
+    <footer class="statusbar">
+      <span id="status-branch">main*</span>
+      <span id="status-file">README.md</span>
+      <span>UTF-8</span>
+      <span>Dart · SEO wired → <a href="https://sangamadhikari.com" rel="noopener noreferrer">sangamadhikari.com</a></span>
+      <span class="statusbar__right">Ln <span id="status-ln">1</span> · Col 1</span>
+    </footer>
+  </div>
+
+  <!-- Command palette -->
+  <div class="pal" id="pal" hidden>
+    <div class="pal__scrim" data-close-pal></div>
+    <div class="pal__box" role="dialog" aria-modal="true" aria-label="Command palette">
+      <input id="pal-input" class="pal__input" type="text" placeholder="Type a command…" autocomplete="off" />
+      <ul class="pal__list" id="pal-list"></ul>
+      <p class="pal__hint">↑↓ navigate · Enter run · Esc close</p>
+    </div>
+  </div>
+
+  <!-- SEO-readable fallback for crawlers / no-JS -->
+  <noscript>
+    <main style="max-width:40rem;margin:2rem auto;font-family:monospace;color:#f3f0e6;background:#06110c;padding:2rem">
+      <h1>Sawongam — Sangam Adhikari</h1>
+      <p>Flutter Full-Stack Developer. Packages on pub.dev. Portfolio at <a href="https://sangamadhikari.com">sangamadhikari.com</a>.</p>
+      <ul>
+        <li><a href="https://pub.dev/packages/multi_tap_action">multi_tap_action</a></li>
+        <li><a href="https://pub.dev/packages/tournament_bracket_kit">tournament_bracket_kit</a></li>
+        <li><a href="https://github.com/sawongam">GitHub</a></li>
       </ul>
-    </section>
-
-    <section class="band band--signal" id="ecosystem" aria-labelledby="eco-title">
-      <div class="band__head" data-reveal>
-        <p class="eyebrow">04 — Ecosystem</p>
-        <h2 id="eco-title">One brand, two surfaces</h2>
-        <p class="band__sub">
-          Long-form articles and the full portfolio stay on the primary domain.
-          This GitHub Pages site hosts the developer tools layer — packages, demos, and open-source entry points.
-        </p>
-      </div>
-      <div class="eco" data-reveal>
-        <a class="eco__card" href="https://sangamadhikari.com" rel="noopener noreferrer">
-          <span class="eco__label">Primary</span>
-          <strong>sangamadhikari.com</strong>
-          <em>Blog · resume · portfolio · contact</em>
-        </a>
-        <a class="eco__card" href="https://sangamadhikari.com/portfolio" rel="noopener noreferrer">
-          <span class="eco__label">Work</span>
-          <strong>Portfolio</strong>
-          <em>RestroX · Simple Patro · Chablyy · more</em>
-        </a>
-        <a class="eco__card" href="https://github.com/sawongam" rel="noopener noreferrer">
-          <span class="eco__label">Code</span>
-          <strong>github.com/sawongam</strong>
-          <em>Repos · packages · experiments</em>
-        </a>
-        <a class="eco__card" href="https://pub.dev/publishers/sangamadhikari.com/packages" rel="noopener noreferrer">
-          <span class="eco__label">Packages</span>
-          <strong>pub.dev publisher</strong>
-          <em>multi_tap_action · tournament_bracket_kit</em>
-        </a>
-        <a class="eco__card" href="https://www.linkedin.com/in/sawongam" rel="noopener noreferrer">
-          <span class="eco__label">Network</span>
-          <strong>LinkedIn</strong>
-          <em>linkedin.com/in/sawongam</em>
-        </a>
-      </div>
-    </section>
-
-    <section class="band" id="contact" aria-labelledby="contact-title">
-      <div class="contact" data-reveal>
-        <div>
-          <p class="eyebrow">05 — Contact</p>
-          <h2 id="contact-title">Build something that ships</h2>
-          <p>
-            Flutter Full-Stack Developer · Lalitpur, Nepal · available for thoughtful product work.
-          </p>
-        </div>
-        <ul class="contact__list">
-          <li><a href="mailto:sangamadhikari.61@gmail.com">sangamadhikari.61@gmail.com</a></li>
-          <li><a href="https://sangamadhikari.com/#contact" rel="noopener noreferrer">Contact form on main site</a></li>
-          <li><a href="https://github.com/sawongam" rel="noopener noreferrer">github.com/sawongam</a></li>
-          <li><a href="tel:+9779819102869">+977 9819102869</a></li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer class="foot">
-    <p>
-      <strong>Sawongam</strong> · developer hub for
-      <a href="https://sangamadhikari.com" rel="noopener noreferrer">Sangam Adhikari</a>
-    </p>
-    <p class="foot__fine">© <span id="year"></span> · Cross-linked with sangamadhikari.com · Not a mirror of the blog</p>
-  </footer>
+    </main>
+  </noscript>
 
   <script src="js/main.js" defer></script>
 </body>
