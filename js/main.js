@@ -191,11 +191,23 @@
   renderSearch("");
 
   // ---------- Terminal ----------
+  const term = document.getElementById("term");
+  const termBody = document.getElementById("term-body");
   const termOut = document.getElementById("term-out");
   const termForm = document.getElementById("term-form");
   const termInput = document.getElementById("term-input");
   const history = [];
   let histIdx = -1;
+
+  const scrollTerm = () => {
+    if (termBody) termBody.scrollTop = termBody.scrollHeight;
+  };
+
+  const focusTerm = () => {
+    term?.classList.add("is-focused");
+    termInput?.focus({ preventScroll: true });
+    scrollTerm();
+  };
 
   const printTerm = (html, cls = "") => {
     if (!termOut) return;
@@ -203,7 +215,7 @@
     if (cls) line.className = cls;
     line.innerHTML = html;
     termOut.appendChild(line);
-    termOut.scrollTop = termOut.scrollHeight;
+    scrollTerm();
   };
 
   const HELP = [
@@ -298,6 +310,7 @@
       }
       case "clear":
         if (termOut) termOut.innerHTML = "";
+        focusTerm();
         break;
       case "neofetch":
       case "fetch":
@@ -318,11 +331,72 @@
     }
   };
 
+  // Whole terminal acts like VS Code: click / paste / type anywhere
+  let termPointer = null;
+
+  term?.addEventListener("mousedown", (e) => {
+    if (e.target.closest("a") || e.target === termInput) return;
+    termPointer = { x: e.clientX, y: e.clientY };
+  });
+
+  term?.addEventListener("mouseup", (e) => {
+    if (!termPointer) return;
+    const moved = Math.hypot(e.clientX - termPointer.x, e.clientY - termPointer.y) > 5;
+    const selected = Boolean(window.getSelection()?.toString());
+    termPointer = null;
+    if (moved || selected || e.target.closest("a")) return;
+    focusTerm();
+  });
+
+  term?.addEventListener("focus", () => term.classList.add("is-focused"));
+  termInput?.addEventListener("focus", () => term?.classList.add("is-focused"));
+  termInput?.addEventListener("blur", () => {
+    requestAnimationFrame(() => {
+      if (!term?.contains(document.activeElement)) term?.classList.remove("is-focused");
+    });
+  });
+
+  term?.addEventListener("paste", (e) => {
+    if (document.activeElement === termInput) return;
+    e.preventDefault();
+    const text = e.clipboardData?.getData("text") || "";
+    if (!text || !termInput) return;
+    const start = termInput.selectionStart ?? termInput.value.length;
+    const end = termInput.selectionEnd ?? termInput.value.length;
+    termInput.value = termInput.value.slice(0, start) + text + termInput.value.slice(end);
+    const caret = start + text.length;
+    focusTerm();
+    termInput.setSelectionRange(caret, caret);
+  });
+
+  // When terminal panel is focused (tabindex) but input isn't, forward keys
+  term?.addEventListener("keydown", (e) => {
+    if (document.activeElement === termInput) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === "Tab" || e.key === "Escape") return;
+    if (e.key.length === 1) {
+      e.preventDefault();
+      focusTerm();
+      termInput.value += e.key;
+    } else if (e.key === "Backspace") {
+      e.preventDefault();
+      focusTerm();
+      termInput.value = termInput.value.slice(0, -1);
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      focusTerm();
+      termForm?.requestSubmit();
+    } else {
+      focusTerm();
+    }
+  });
+
   termForm?.addEventListener("submit", (e) => {
     e.preventDefault();
     const v = termInput.value;
     termInput.value = "";
     runCommand(v);
+    focusTerm();
   });
 
   termInput?.addEventListener("keydown", (e) => {
