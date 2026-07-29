@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 220" fill="none" role="img" aria-label="SA signature — Sangam Adhikari">
+  <defs>
+    <linearGradient id="sa-ink" x1="30" y1="40" x2="450" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f2ffc4"/>
+      <stop offset="35%" stop-color="#a8ff3e"/>
+      <stop offset="100%" stop-color="#4f8a18"/>
+    </linearGradient>
+  </defs>
+
+  <!-- S → A continuous stroke -->
+  <path
+    stroke="url(#sa-ink)"
+    stroke-width="6.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+    d="
+      M 124 58
+      C 102 42, 70 48, 58 74
+      C 46 102, 74 116, 108 122
+      C 140 128, 164 142, 156 166
+      C 148 190, 108 198, 78 180
+      C 60 168, 58 148, 78 138
+      C 104 124, 142 112, 172 88
+      C 192 72, 210 44, 222 28
+      C 228 18, 242 18, 250 30
+      C 266 54, 288 112, 308 176
+    "
+  />
+
+  <!-- A bar — connects both legs -->
+  <path
+    stroke="url(#sa-ink)"
+    stroke-width="4.5"
+    stroke-linecap="round"
+    fill="none"
+    d="M 164 112 L 278 118"
+  />
+
+  <!-- Apex flick -->
+  <path
+    stroke="url(#sa-ink)"
+    stroke-width="2.8"
+    stroke-linecap="round"
+    fill="none"
+    d="M 222 28 C 232 12, 252 8, 266 18"
+  />
+
+  <!-- Underline flourish -->
+  <path
+    stroke="url(#sa-ink)"
+    stroke-width="3.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+    d="
+      M 48 200
+      C 130 214, 230 208, 320 188
+      C 380 172, 424 150, 448 128
+      C 460 118, 460 108, 448 110
+      C 432 114, 426 128, 438 138
+      C 454 150, 472 144, 478 132
+    "
+  />
+</svg>

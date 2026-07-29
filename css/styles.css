@@ -79,6 +79,26 @@ input {
   background: var(--bg-2);
 }
 
+.titlebar__sig {
+  display: inline-flex;
+  align-items: center;
+  height: 1.7rem;
+  flex-shrink: 0;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.titlebar__sig img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+.titlebar__sig:hover {
+  opacity: 1;
+  filter: brightness(1.15);
+}
+
 .titlebar__dots {
   display: flex;
   gap: 6px;

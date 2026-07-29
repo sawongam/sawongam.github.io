@@ -1,5 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sangam">
-  <rect width="64" height="64" rx="10" fill="#0a1210"/>
-  <rect x="2" y="2" width="60" height="60" rx="8" fill="none" stroke="#a8ff3e" stroke-opacity="0.35" stroke-width="1.5"/>
-  <text x="32" y="40" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="18" font-weight="700" fill="#a8ff3e" letter-spacing="-0.5">Sangam</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="SA">
+  <rect width="64" height="64" rx="14" fill="#06110c"/>
+  <defs>
+    <linearGradient id="g" x1="6" y1="8" x2="58" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#eaffb0"/>
+      <stop offset="0.45" stop-color="#a8ff3e"/>
+      <stop offset="1" stop-color="#5f9a22"/>
+    </linearGradient>
+  </defs>
+  <g stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path stroke-width="2.5" d="M22 16 C14 14, 9 19, 9 26 C9 34, 18 36, 26 39 C34 42, 40 47, 37 54 C35 59, 24 61, 16 57"/>
+    <path stroke-width="2.6" d="M20 54 C30 40, 38 24, 44 14 C46 22, 50 40, 54 54"/>
+    <path stroke-width="1.9" d="M30 36 H48"/>
+    <path stroke-width="1.5" d="M10 58 C24 62, 42 60, 56 52 C59 50, 59 47, 55 48"/>
+  </g>
 </svg>
