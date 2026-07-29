@@ -19,45 +19,6 @@
     mail: "mailto:sangamadhikari.61@gmail.com",
   };
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // ---------- Boot sequence ----------
-  const boot = document.getElementById("boot");
-  const bootLog = document.getElementById("boot-log");
-  const ide = document.getElementById("ide");
-
-  const bootLines = [
-    { t: "$ sawongam init --workspace", cls: "cmd" },
-    { t: "loading persona ............. Sangam Adhikari", cls: "dim" },
-    { t: "mounting packages ............ multi_tap_action, tournament_bracket_kit", cls: "dim" },
-    { t: "linking primary domain ...... sangamadhikari.com", cls: "dim" },
-    { t: "injecting Person schema ..... ok", cls: "ok" },
-    { t: "ready. open README.md · press Ctrl/⌘K for commands", cls: "ok" },
-  ];
-
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-  const runBoot = async () => {
-    if (!boot || !bootLog || !ide) return;
-    if (reduceMotion) {
-      boot.classList.add("is-done");
-      ide.classList.add("is-on");
-      return;
-    }
-    for (const line of bootLines) {
-      const span = document.createElement("div");
-      span.className = line.cls === "cmd" ? "cmd" : line.cls;
-      if (line.cls === "cmd") span.innerHTML = `<span class="cmd">${line.t}</span>`;
-      else span.textContent = line.t;
-      bootLog.appendChild(span);
-      await sleep(220);
-    }
-    await sleep(380);
-    boot.classList.add("is-done");
-    ide.classList.add("is-on");
-    printTerm("workspace online. type <span class=\"cmd\">help</span>", "ok");
-  };
-
   // ---------- Line numbers ----------
   const paintGutters = () => {
     document.querySelectorAll(".buf").forEach((buf) => {
@@ -517,5 +478,5 @@
   paintGutters(); // recount after linkify (same lines)
   renderTabs();
   openFile("readme");
-  runBoot();
+  printTerm('workspace online. type <span class="cmd">help</span>', "ok");
 })();
