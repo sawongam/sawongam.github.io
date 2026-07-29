@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /.cursor/
+Disallow: /dumps/
+Disallow: /cv/
+Disallow: /fb-clone/
+Disallow: /insta-clone/
+Disallow: /twitter-clone/
+Disallow: /htmlandcss/
 
 Sitemap: https://sawongam.github.io/sitemap.xml
