@@ -280,7 +280,7 @@
             '<span class="ok">sawongam@github.io</span>',
             "---------------------",
             "OS: Flutter Full-Stack",
-            "Host: Lalitpur, Nepal",
+            "Host: Nepal",
             "Packages: 2 (pub.dev)",
             "Users: 25000+",
             `Site: ${LINKS.site}`,
